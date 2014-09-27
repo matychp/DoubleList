@@ -250,7 +250,7 @@ public class DoubleList <E extends Comparable> implements Iterable<E>
          
          E x = fondo.getInfo();
          fondo.getPrevious().setNext(null);
-         fondo = fondo.getPrevious();
+         fondo = fondo.getPrevious();          
          
          cantidad--;
          return x;
@@ -302,11 +302,19 @@ public class DoubleList <E extends Comparable> implements Iterable<E>
       {
           if( index < 0 || index >= size() ) { throw new NoSuchElementException( "Indice fuera del rango" ); }
          
-          Node <E> p = frente;
-          for( int i = 0; i < index; i++ ) { p = p.getNext(); }
-          
-          E ant = p.getInfo();
-          p.setInfo( x );
+          E ant;
+          if(index >= (cantidad/2)){
+            Node <E> p = fondo; 
+            for( int i = cantidad-1; i > index; i-- ) { p = p.getPrevious(); }
+            ant = p.getInfo();
+            p.setInfo( x );
+          }
+          else{
+            Node <E> n = frente;
+            for( int i = 0; i < index; i++ ) { n = n.getNext(); }
+            ant = n.getInfo();
+            n.setInfo( x );
+          }
           return ant;
       }
       
