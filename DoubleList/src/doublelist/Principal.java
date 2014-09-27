@@ -21,6 +21,12 @@ public class Principal {
         dl.addFirst(2);
         dl.addLast(3);
         dl.addLast(4);
+        dl.addFirst(5);
+        dl.addFirst(6);
+        dl.addLast(7);
+        dl.addLast(8);
+        System.out.println(dl.get(2));
+        System.out.println(dl.get(5));
     }
     
 }

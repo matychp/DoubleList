@@ -87,6 +87,8 @@ public class DoubleList <E extends Comparable> implements Iterable<E>
        *  Retorna (pero sin removerlo) el objeto ubicado en la posicion "index" 
        *  de la lista, tomando como convencion que el primer nodo esta en la 
        *  posicion cero.
+       *  Si el index a buscar está despues de la mitad de la lista busca desde el fondo para atras.
+       *  Si está antes de la mitad de la lista, busca desde el frente hacia adelante.
        *  @param index el numero de orden del objeto a acceder.
        *  @return una referencia objeto ubicado en la posicion "index".
        *  @throws IndexOutOfBoundsException si index esta fuera de rango.
@@ -95,9 +97,17 @@ public class DoubleList <E extends Comparable> implements Iterable<E>
       {
           if( index < 0 || index >= size() ) { throw new IndexOutOfBoundsException( "Indice fuera del rango" ); }
          
-          Node <E> p = frente;
-          for( int i = 0; i < index; i++ ){  p = p.getNext(); }
-          return p.getInfo();
+          if(index >= (cantidad / 2)){
+            Node <E> p = fondo;
+            for( int i = cantidad-1; i > index; i-- ){  p = p.getPrevious(); }
+            return p.getInfo();
+          }
+          else{
+            Node <E> n = frente;
+            for( int i = 0; i < index; i++ ){  n = n.getNext(); }
+            return n.getInfo();
+          }
+          
       }
       
       /**
