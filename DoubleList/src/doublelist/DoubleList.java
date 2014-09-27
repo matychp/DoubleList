@@ -113,7 +113,7 @@ public class DoubleList <E extends Comparable> implements Iterable<E>
       
       /**
        *  Retorna (pero sin removerlo) el objeto ubicado al final de la lista. 
-       *  @return una referencia al primer elemento de la lista.
+       *  @return una referencia al ultimo elemento de la lista.
        *  @throws NoSuchElementException si la lista estaba vacia.
        */
       public E getLast()
@@ -213,22 +213,6 @@ public class DoubleList <E extends Comparable> implements Iterable<E>
       }
       
       /**
-       *  Retorna (y remueve) el objeto ubicado al final de la lista. 
-       *  @return el ultimo elemento de la lista.
-       *  @throws NoSuchElementException si la lista estaba vac�a.
-       */
-      public E removeLast()
-      {
-         if (fondo == null) { throw new NoSuchElementException("Error: la lista esta vacia..."); }
-         
-         E x = fondo.getInfo();
-         fondo = fondo.getPrevious();
-         
-         cantidad--;
-         return x;
-      }
-      
-      /**
        *  Retorna (y remueve) el objeto ubicado al principio de la lista. 
        *  @return el primer elemento de la lista.
        *  @throws NoSuchElementException si la lista estaba vacia.
@@ -238,7 +222,25 @@ public class DoubleList <E extends Comparable> implements Iterable<E>
          if (frente == null) { throw new NoSuchElementException("Error: la lista esta vacia..."); }
          
          E x = frente.getInfo();
+         frente.getNext().setPrevious(null);
          frente = frente.getNext();
+         
+         cantidad--;
+         return x;
+      }
+      
+      /**
+       *  Retorna (y remueve) el objeto ubicado al final de la lista. 
+       *  @return el ultimo elemento de la lista.
+       *  @throws NoSuchElementException si la lista estaba vacia.
+       */
+      public E removeLast()
+      {
+         if (fondo == null) { throw new NoSuchElementException("Error: la lista esta vacia..."); }
+         
+         E x = fondo.getInfo();
+         fondo.getPrevious().setNext(null);
+         fondo = fondo.getPrevious();
          
          cantidad--;
          return x;
