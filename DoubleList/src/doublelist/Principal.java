@@ -15,6 +15,7 @@ public class Principal {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+//Tuviejaentanga
         DoubleList<Integer> dl = new DoubleList<>();
         
         //Insertando elementos al comienzo y al final. Funciona
